@@ -17,19 +17,23 @@ const Invoice = () => {
         if (storedProducts) {
             setProducts(JSON.parse(storedProducts));
         }
+    }, []);
 
-        const storedDetails = localStorage.getItem('products');
+    useEffect(()=>{
+        const storedDetails = localStorage.getItem('details');
         if (storedDetails) {
             setProducts(JSON.parse(storedDetails));
         }
-    }, []);
+    }, [])
 
 
     useEffect(() => {
         localStorage.setItem('products', JSON.stringify(products));
-        localStorage.setItem('details', JSON.stringify(details));
-    }, [products, details]);
+    }, [products]);
 
+    useEffect(() => {
+        localStorage.setItem('details', JSON.stringify(details));
+    }, [ details]);
 
     const addProduct = (product) => {
         setProducts([...products, product]);
